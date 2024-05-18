@@ -7,4 +7,5 @@ export const AppDataSource = new DataSource({
     database: "test.db",
     logging: false,
     entities: [User],
+    migrations: ['src/migration/**/*{.ts,.js}']
 })
