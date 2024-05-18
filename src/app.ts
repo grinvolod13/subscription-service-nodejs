@@ -1,11 +1,11 @@
-const express = require("express");
-const axios = require('axios');
-const swaggerUi = require('swagger-ui-express');
+import express, { Express, Request, Response } from "express";
+import axios from 'axios';
+import swaggerUi from 'swagger-ui-express';
 const swaggerDocument = require('./swagger.json');
-const bodyParser = require('body-parser')
-
+import bodyParser from 'body-parser';
+import "reflect-metadata" // for typeorm
 const bank_api_url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
-const app = express();
+const app: Express = express();
 const port = 3000;
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-async function getUSDtoUAH(){
+async function getUSDtoUAH(){ // TODO: cache data
     try {
         let apiResponse = await axios.get(bank_api_url);
         let rate = apiResponse.data.find(
-            (item)=>(item.r030 == 840) // r030 - digital currency code, for USD is 840 
+            (item: any)=>(item.r030 == 840) // r030 - digital currency code, for USD is 840 
         ).rate;
         return [null, rate];
     } catch (error){
@@ -28,10 +28,9 @@ async function getUSDtoUAH(){
 }
 
 
-app.get("/api/rate", async function (req, res) {
+app.get("/api/rate", async function (req: Request, res: Response) {
     res.setHeader('Content-Type', 'application/json');
     let [err, rate] = await getUSDtoUAH();
-    console.log(err)
     if (err!=null){
         res.status(400).json();
     } else {
@@ -39,7 +38,7 @@ app.get("/api/rate", async function (req, res) {
     }
 });
 
-app.post("/api/subscribe", function (req, res) {
+app.post("/api/subscribe", function (req: Request, res: Response) {
     res.setHeader('Content-Type', 'application/json');
     if (req.body.email!=null){
         res.status(200).json(req.body.email);
