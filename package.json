@@ -6,6 +6,7 @@
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "ts-node src/app.ts",
+      "scheduler": "ts-node ./src/send-emails.ts",
       "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts"
    },
    "repository": {
@@ -19,13 +20,15 @@
    },
    "homepage": "https://github.com/grinvolod13/subscription-service-nodejs#readme",
    "dependencies": {
+      "@types/node-cron": "^3.0.11",
       "axios": "^1.6.8",
       "express": "^4.19.2",
+      "node-cron": "^3.0.3",
+      "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "sqlite3": "^5.1.7",
       "swagger-ui-express": "^5.0.0",
-      "typeorm": "0.3.20",
-      "pg": "^8.4.0"
+      "typeorm": "0.3.20"
    },
    "devDependencies": {
       "@types/axios": "^0.14.0",
