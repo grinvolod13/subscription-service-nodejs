@@ -6,7 +6,7 @@
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "ts-node src/app.ts",
-      "scheduler": "ts-node ./src/send-emails.ts",
+      "scheduler": "ts-node ./src/email/scheduler.ts",
       "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts"
    },
    "repository": {
@@ -24,6 +24,7 @@
       "axios": "^1.6.8",
       "express": "^4.19.2",
       "node-cron": "^3.0.3",
+      "nodemailer": "^6.9.13",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "sqlite3": "^5.1.7",
@@ -35,6 +36,7 @@
       "@types/body-parser": "^1.19.5",
       "@types/express": "^4.17.21",
       "@types/node": "^16.11.10",
+      "@types/nodemailer": "^6.4.15",
       "@types/swagger-ui-express": "^4.1.6",
       "node-dev": "^8.0.0",
       "ts-node": "10.9.1",

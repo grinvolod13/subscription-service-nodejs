@@ -8,6 +8,7 @@ import "reflect-metadata" // for typeorm
 import { AppDataSource } from "./data-source"
 import { User } from "./entity/User"
 import { getUSDtoUAH } from "./rate";
+require('dotenv').config()
 
 AppDataSource
     .initialize()
